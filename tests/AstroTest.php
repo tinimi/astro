@@ -1,19 +1,27 @@
 <?php
 
 namespace tests;
-
 use PHPUnit\Framework\TestCase;
+use tests\lib\CsvFileIterator;
 
 final class AstroTest extends TestCase {
 	protected $astro = null;
+
 	public function setUp() {
 		if (!$this->astro) {
 			$this->astro = new \Astro();
 		}
 	}
-	public function test_h2d() {
-		$this->assertEquals(180, $this->astro->h2d("12:00:00"));
 
+	/**
+	 * @dataProvider data_h2d
+	 */
+	public function test_h2d($input, $expected) {
+		$this->assertEquals($expected, $this->astro->h2d($input));
+	}
+
+	public function data_h2d() {
+		return new CsvFileIterator(dirname(__FILE__) . '/data/h2d.csv');
 	}
 }
 

@@ -1,3 +1,3 @@
 #!/bin/bash
-./vendor/phpunit/phpunit/phpunit --bootstrap Astro.php tests/AstroTest
+./vendor/phpunit/phpunit/phpunit --bootstrap vendor/autoload.php tests/AstroTest
 
