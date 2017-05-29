@@ -16,9 +16,18 @@ class Astro {
 	function h2d($time, $delimiter = ':') {
 		$arr = explode($delimiter, $time);
 		$arr = array_reverse($arr);
-		$s = $arr[0];
-		$m = isset($arr[1]) ? $arr[1] : 0;
-		$h = isset($arr[2]) ? $arr[2] : 0;
+
+		$negative = trim($time)[0] == '-' ? true : false;
+
+		$s = abs($arr[0]);
+		$m = isset($arr[1]) ? abs($arr[1]) : 0;
+		$h = isset($arr[2]) ? abs($arr[2]) : 0;
+
+		if ($negative) {
+			$h = -abs($h);
+			$m = -abs($m);
+			$s = -abs($s);
+		}
 
 		$t = $h + $m/60 + $s/3600;
 
