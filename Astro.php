@@ -17,7 +17,7 @@ class Astro {
 		$arr = explode($delimiter, $time);
 		$arr = array_reverse($arr);
 
-		$negative = trim($time)[0] == '-' ? true : false;
+		$negative = trim($time)[0] == '-';
 
 		$s = abs($arr[0]);
 		$m = isset($arr[1]) ? abs($arr[1]) : 0;
