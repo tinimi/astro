@@ -23,5 +23,17 @@ final class AstroTest extends TestCase {
 	public function data_h2d() {
 		return new CsvFileIterator(dirname(__FILE__) . '/data/h2d.csv');
 	}
+
+	/**
+	 * @dataProvider data_d2h
+	 */
+	public function test_d2h($expected, $input) {
+		$this->assertEquals($expected, $this->astro->d2h($input));
+	}
+
+	public function data_d2h() {
+		return new CsvFileIterator(dirname(__FILE__) . '/data/d2h.csv');
+	}
+
 }
 
