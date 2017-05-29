@@ -54,13 +54,19 @@ class Astro {
 		$s = ($deg / 15) * 3600;
 
 		$s = number_format($s, $precision, '.', '');
+		// We need this to trim ".00" or ".10"->"0.1"
+		$s = rtrim($s, '0');
+		$s = rtrim($s, '.');
 
+		// Pad minutes to 00
 		$m = str_pad($m, 2, '0', STR_PAD_LEFT);
-		$s = '' . $s;
+
+		// pad seconds with dot <10 to 00
 		if (strpos($s, '.') === 1) {
 			$s = '0' . $s;
 		}
 
+		// pad seconds without dot
 		if (strpos($s, '.') === false) {
 			$s = str_pad($s, 2, '0', STR_PAD_LEFT);
 		}
