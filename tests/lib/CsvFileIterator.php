@@ -17,10 +17,10 @@ class CsvFileIterator implements Iterator {
 
 	public function rewind() {
 		rewind($this->file);
-		// Skip empty lines
+		// Skip empty lines and comments (lines started with "#")
 		do {
 			$this->current = fgetcsv($this->file);
-		} while (is_array($this->current) and $this->current[0] == NULL);
+		} while (is_array($this->current) and (NULL == $this->current[0] || '#' == $this->current[0][0]));
 
 		$this->key = 0;
 	}
@@ -38,10 +38,10 @@ class CsvFileIterator implements Iterator {
 	}
 
 	public function next() {
-		// Skip empty lines
+		// Skip empty lines and comments (lines started with "#");
 		do {
 			$this->current = fgetcsv($this->file);
 			$this->key++;
-		} while(is_array($this->current) and $this->current[0] == NULL);
+		} while(is_array($this->current) and (NULL == $this->current[0] || '#' == $this->current[0][0]));
 	}
 }
