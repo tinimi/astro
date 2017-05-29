@@ -24,9 +24,9 @@ class Astro {
 		$h = isset($arr[2]) ? abs($arr[2]) : 0;
 
 		if ($negative) {
-			$h = -abs($h);
-			$m = -abs($m);
-			$s = -abs($s);
+			$h = -$h;
+			$m = -$m;
+			$s = -$s;
 		}
 
 		$t = $h + $m/60 + $s/3600;
