@@ -45,6 +45,9 @@ class Astro {
 	 * @return string time in hh:mm:ss.ss format
 	 */
 	function d2h($deg, $precision = 2) {
+		$negative = $deg < 0;
+		$deg = abs($deg);
+
 		$h = floor($deg / 15);
 		$deg = $deg - $h * 15;
 
@@ -54,6 +57,18 @@ class Astro {
 		$s = ($deg / 15) * 3600;
 
 		$s = number_format($s, $precision, '.', '');
+
+		if ($s >= 60) {
+			$s -= 60;
+			$s = number_format($s, $precision, '.', '');
+
+			$m++;
+			if ($m >= 60) {
+				$m -= 60;
+				$h++;
+			}
+		}
+
 		// We need this to trim ".00" or ".10"->"0.1"
 		$s = rtrim($s, '0');
 		$s = rtrim($s, '.');
@@ -71,7 +86,7 @@ class Astro {
 			$s = str_pad($s, 2, '0', STR_PAD_LEFT);
 		}
 		
-		return "$h:$m:$s";
+		return ($negative ? '-' : '') ."$h:$m:$s";
 
 	}
 
